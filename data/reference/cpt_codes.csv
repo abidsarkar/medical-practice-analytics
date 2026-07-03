@@ -1,0 +1,9 @@
+cpt_code,description,avg_charge
+99213,Office visit established patient level 3,75.00
+99214,Office visit established patient level 4,110.00
+99203,Office visit new patient level 3,120.00
+97110,Therapeutic exercises,55.00
+97140,Manual therapy techniques,65.00
+85025,Complete blood count,25.00
+71045,Chest X-ray single view,90.00
+93000,Electrocardiogram complete,85.00
