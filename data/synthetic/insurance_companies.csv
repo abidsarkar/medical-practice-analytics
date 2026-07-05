@@ -1,0 +1,9 @@
+insurance_company_id,company_name,payer_id,billing_address,email,phone_number
+1,Blue Cross Blue Shield,BCBS001,"123 Blue Cross Way, Chicago, IL",claims@bcbs.com,800-123-4567
+2,Aetna,AETNA01,"456 Aetna Ave, Hartford, CT",provider@aetna.com,800-234-5678
+3,United Healthcare,UHC0001,"789 United Blvd, Minnetonka, MN",claims@uhc.com,800-345-6789
+4,Cigna,CIGNA01,"321 Cigna Dr, Bloomfield, CT",support@cigna.com,800-456-7890
+5,Humana,HUMANA1,"654 Humana St, Louisville, KY",claims@humana.com,800-567-8901
+6,Medicare,MCRPARTB,"7500 Security Blvd, Baltimore, MD",medicare@cms.gov,800-633-4227
+7,Medicaid,MCDSTAT,State Medicaid Office,medicaid@state.gov,800-678-9012
+8,Kaiser Permanente,KP00001,"1 Kaiser Plaza, Oakland, CA",claims@kp.org,800-789-0123

@@ -22,3 +22,50 @@ psql -d medical_practice -U med_analyst
 ```
 
 
+Insurance Company
+        │
+        ▼
+    Patient
+        │
+        ▼
+ Appointment
+        │
+        ▼
+   Encounter
+      │   │
+      │   ├──────────────┐
+      ▼                  ▼
+Diagnosis          Procedure
+      │                  │
+      └──────────┬───────┘
+                 ▼
+              Claim
+                 │
+        ┌────────┴─────────┐
+        ▼                  ▼
+ Claim Line Items      Payments
+
+
+ Insurance Company
+        │
+        ▼
+Patient Insurance
+        ▲
+        │
+     Patient
+        │
+        ▼
+ Appointment
+        │
+        ▼
+ Encounter
+   ┌────┴─────┐
+   ▼          ▼
+Diagnosis  Procedure
+               │
+               ▼
+             Claim
+               │
+      ┌────────┴────────┐
+      ▼                 ▼
+ Claim Line Items   Payments

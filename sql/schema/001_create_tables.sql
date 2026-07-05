@@ -1,24 +1,37 @@
 -- Connect to medical_practice database first
 -- \c medical_practice
-
+CREATE TABLE IF NOT EXISTS insurance_companies(
+    insurance_company_id SERIAL PRIMARY KEY,
+    company_name VARCHAR(200) NOT NULL,
+    payer_id VARCHAR(20) UNIQUE NOT NULL, 
+    billing_address VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(20)
+);
+CREATE TABLE IF NOT EXISTS providers (
+    provider_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    specialty VARCHAR(100) NOT NULL,
+    npi VARCHAR(10) UNIQUE
+);
 CREATE TABLE IF NOT EXISTS patients (
     patient_id SERIAL PRIMARY KEY,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     dob DATE,
     gender VARCHAR(10),
-    insurance_provider VARCHAR(200),
-    insurance_plan VARCHAR(200),
     date_registered DATE DEFAULT CURRENT_DATE
 );
-
-CREATE TABLE IF NOT EXISTS providers (
-    provider_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    specialty VARCHAR(100),
-    npi VARCHAR(10) UNIQUE
+CREATE TABLE IF NOT EXISTS patient_insurance(
+  patient_insurance_id SERIAL PRIMARY KEY,
+  patient_id INT REFERENCES patients(patient_id),
+  insurance_company_id INT REFERENCES insurance_companies(insurance_company_id),
+  effective_date date,
+  termination_date date,
+  priority INT CHECK (priority BETWEEN 1 AND 5)
 );
+
 
 CREATE TABLE IF NOT EXISTS appointments (
     appointment_id SERIAL PRIMARY KEY,
@@ -33,8 +46,6 @@ CREATE TABLE IF NOT EXISTS appointments (
 CREATE TABLE IF NOT EXISTS encounters (
     encounter_id SERIAL PRIMARY KEY,
     appointment_id INT REFERENCES appointments(appointment_id),
-    patient_id INT REFERENCES patients(patient_id),
-    provider_id INT REFERENCES providers(provider_id),
     encounter_date DATE,
     chief_complaint TEXT
 );
@@ -44,7 +55,7 @@ CREATE TABLE IF NOT EXISTS diagnoses (
     encounter_id INT REFERENCES encounters(encounter_id),
     icd_code VARCHAR(10),
     description VARCHAR(500),
-    diagnosis_rank INT CHECK (diagnosis_rank IN (1,2,3,4))
+    diagnosis_rank INT CHECK (diagnosis_rank IN (1,2,3,4,5,6))
 );
 
 CREATE TABLE IF NOT EXISTS procedures (
@@ -59,8 +70,6 @@ CREATE TABLE IF NOT EXISTS procedures (
 CREATE TABLE IF NOT EXISTS claims (
     claim_id SERIAL PRIMARY KEY,
     encounter_id INT REFERENCES encounters(encounter_id),
-    patient_id INT REFERENCES patients(patient_id),
-    provider_id INT REFERENCES providers(provider_id),
     total_charge DECIMAL(10,2),
     claim_status VARCHAR(20) CHECK (claim_status IN ('Paid','Denied','Pending','Partial')),
     filing_date DATE,
