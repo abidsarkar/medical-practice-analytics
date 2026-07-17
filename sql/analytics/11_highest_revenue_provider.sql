@@ -1,6 +1,3 @@
-select
-*
-from procedures;
 SELECT 
     p.provider_id,
     p.first_name,

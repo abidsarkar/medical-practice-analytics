@@ -12,7 +12,7 @@ SELECT
 FROM patients
 GROUP BY 1
 ORDER BY 1;
---weak wise
+--week wise
 SELECT
     to_char(date_registered, 'YYYY-"W"WW') as week,
     count(patient_id) as total_patient
